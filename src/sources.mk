@@ -10,8 +10,13 @@
 #*****************************************************************************
 
 # Add your Source files to this variable
-SOURCES =
+ifeq ($(PLATFORM),HOST)
+SOURCES  = main.c memory.c
+INCLUDES = -I../include/common
+endif
 
-# Add your include paths to this variable
-INCLUDES = 
+ifeq ($(PLATFORM),HOST)
+SOURCES  = main.c memory.c
+INCLUDES = -I../include/common
+endif
 
