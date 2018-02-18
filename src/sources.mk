@@ -12,11 +12,19 @@
 # Add your Source files to this variable
 ifeq ($(PLATFORM),HOST)
 SOURCES  = main.c memory.c
+
 INCLUDES = -I../include/common
 endif
 
-ifeq ($(PLATFORM),HOST)
-SOURCES  = main.c memory.c
-INCLUDES = -I../include/common
+ifeq ($(PLATFORM),MSP432)
+SOURCES  = main.c memory.c interrupts_msp432p401r_gcc startup_msp432p401r_gcc system_msp432p401r
+INCLUDES = -I../include/common \
+           -I../include/msp432 \
+           -I../include/CMSIS
 endif
 
+DEPS       = $(SOURCES:.c=.d)
+PREPROCS   = $(SOURCES:.c=.i)
+ASSEMBS    = $(SOURCES:.c=.s)
+OBJS       = $(SOURCES:.c=.o)
+DISASSEMBS = $(SOURCES:.c=.asm)
